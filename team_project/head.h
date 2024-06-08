@@ -44,7 +44,7 @@ void cl(void);
 void ov(void);
 void tp(void);
 void fl(void);
-void comment(int a);
+void comment_a(int a);
 void clea(void);
 //void displayMazeWithLimitedView();
 

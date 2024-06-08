@@ -22,6 +22,7 @@ int main(void) {
 	while (1)
 	{
 		if (regame == 1) {
+			//lev = 1; 이코드있으면 재시작시 쉬움난이도 부터 시작
 			game();
 		}
 		else if (clear == 1 && lev < 3)		//이지,노멀 클리어시 다음 레벨로 진행
@@ -146,7 +147,7 @@ void game(void) {
 	while (1) {
 		if (co == 1) {
 			if (time(0) - flag_time100 < 5) {
-				comment(com);
+				comment_p(com);
 
 
 			}
@@ -300,9 +301,44 @@ void game(void) {
 				bomb_num -= 1;
 				bomb();
 			}
-			map[Y - 1][X] = 2;
-
 		}
+		if (GetAsyncKeyState(0x21) & 0x0001)
+		{
+			map[Y - 1][X] = 2;
+		}
+		if (GetAsyncKeyState(0x22) & 0x0001)
+		{
+			X = Y = 1;
+		}
+		if (GetAsyncKeyState(0x63) & 0x0001)
+		{
+			map[Y - 1][X] = 3;
+		}
+		if (GetAsyncKeyState(0x64) & 0x0001)
+		{
+			map[Y - 1][X] = 4;
+		}
+		if (GetAsyncKeyState(0x65) & 0x0001)
+		{
+			map[Y - 1][X] = 5;
+		}
+		if (GetAsyncKeyState(0x66) & 0x0001)
+		{
+			map[Y - 1][X] = 6;
+		}
+		if (GetAsyncKeyState(0x67) & 0x0001)
+		{
+			map[Y - 1][X] = 7;
+		}
+		if (GetAsyncKeyState(0x68) & 0x0001)
+		{
+			map[Y - 1][X] = 8;
+		}
+		if (GetAsyncKeyState(0x69) & 0x0001)
+		{
+			map[Y - 1][X] = 9;
+		}
+
 
 		if (clear)
 		{
@@ -310,6 +346,7 @@ void game(void) {
 				cls;
 				clea();
 				claer();
+				delay;
 				gotoxy(73, 25); printf("다음 레벨로 넘어가려면 enter..");
 
 				if (kbhit())

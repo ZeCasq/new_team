@@ -10,7 +10,7 @@ void teleport(int y, int x);
 void bomb();
 int judgeFlag(void);
 void print_telpo(int** p, int** p2, int, int, int, int);
-int flag_time = 0 ;
+int flag_time = 0;
 int flag_time2 = 0;
 int flag_time3 = 0;
 
@@ -76,44 +76,44 @@ int makeFlag()
 		}
 	}
 
-	//for (int i = 0; i < 5; i++)				//3번깃발 배치
-	//{
+	for (int i = 0; i < 5; i++)				//3번깃발 배치
+	{
 
-	//	while (1)
-	//	{
-	//		x = rand() % (mapSize - 1) + 1;
-	//		y = rand() % (mapSize - 1) + 1;
-	//		if (map[x][y] == SPACE)
-	//		{
-	//			//map[x][y]에 깃발 배치
-	//			map[x][y] = 3;
-	//			break;
-	//		}
-	//		else
-	//		{
-	//			continue;
-	//		}
-	//	}
-	//}
+		while (1)
+		{
+			x = rand() % (mapSize - 1) + 1;
+			y = rand() % (mapSize - 1) + 1;
+			if (map[x][y] == SPACE)
+			{
+				//map[x][y]에 깃발 배치
+				map[x][y] = 3;
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}
+	}
 
-	//for (int i = 0; i < 5; i++)				//4번깃발 배치
-	//{
-	//	while (1)
-	//	{
-	//		x = rand() % (mapSize - 1) + 1;
-	//		y = rand() % (mapSize - 1) + 1;
-	//		if (map[x][y] == SPACE)
-	//		{
-	//			//map[x][y]에 깃발 배치
-	//			map[x][y] = 4;
-	//			break;
-	//		}
-	//		else
-	//		{
-	//			continue;
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < 5; i++)				//4번깃발 배치
+	{
+		while (1)
+		{
+			x = rand() % (mapSize - 1) + 1;
+			y = rand() % (mapSize - 1) + 1;
+			if (map[x][y] == SPACE)
+			{
+				//map[x][y]에 깃발 배치
+				map[x][y] = 4;
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}
+	}
 
 	for (int i = 0; i < 5; i++)				//5번깃발 배치
 	{
@@ -197,7 +197,7 @@ int makeFlag()
 
 	for (int i = 0; i < 5; i++)				//9번깃발 배치(telpo)
 	{
-		
+
 
 		while (1)
 		{
@@ -271,7 +271,7 @@ int judgeFlag()
 				clea();
 				claer();
 				gotoxy(73, 25); printf("다음 레벨로 넘어가려면 enter..");
-				
+
 				if(kbhit())
 				while (!GetAsyncKeyState(VK_RETURN)) {//게임 완전 클리어
 				}
@@ -280,7 +280,7 @@ int judgeFlag()
 				cls;
 				game();
 			}
-			else { 
+			else {
 				clea();
 				claer();
 				delay;
@@ -330,7 +330,7 @@ int judgeFlag()
 		}
 		else if (temp == 7)				//시간 감소
 		{
-			 com = temp;
+			com = temp;
 			comment(com);
 			Start_time -= 30;
 			map[Y][X] = SPACE;
@@ -366,7 +366,7 @@ int judgeFlag()
 					continue;
 				}
 			}
-			
+
 			return 0;
 		}
 		else if (temp == 10)				//bomb
@@ -376,7 +376,7 @@ int judgeFlag()
 			bomb_num += 1;
 			map[Y][X] = SPACE;
 		}
-		
+
 	}
 	//Flag[index].~~처럼 값 활용~
 }
@@ -441,13 +441,13 @@ void bomb()
 	{
 		t_y = 15 + eyesight - 1 - Bomb_Range;
 	}
-	else if(Y < eyesight)
+	else if (Y < eyesight)
 	{
 		t_y = 15 - (eyesight - Y);
 	}
 	else if (Y > (mapSize - 1) - eyesight)
 	{
-		t_y = 15 +  (eyesight - (mapSize - 1 - Y));
+		t_y = 15 + (eyesight - (mapSize - 1 - Y));
 
 	}
 	else
@@ -476,21 +476,22 @@ void bomb()
 			y++;
 		}
 
-		Sleep(300);
+		Sleep(170);
 	}
+	cls;
 
 	return 0;
 }
 
 void teleport(int y, int x)
 {
-	
+
 
 	int** p = (int**)malloc(sizeof(int*) * (eyesight * 2 + 1));
 	int** p2 = (int**)malloc(sizeof(int*) * (eyesight * 2 + 1));
 	int past_x, past_y;
 	int past_X, past_Y;
-	
+
 	int temp_x, temp_y;
 	if (X - eyesight < 0)
 	{
@@ -573,7 +574,7 @@ void teleport(int y, int x)
 
 void print_telpo(int** p, int** p2, int past_x, int past_y, int past_X, int past_Y)
 {
-	
+
 	int temp_x, temp_y;
 	if (X - eyesight < 0)
 	{
@@ -628,7 +629,7 @@ void print_telpo(int** p, int** p2, int past_x, int past_y, int past_X, int past
 						else
 							printf("□");
 					}
-					
+
 				}
 				else if (k > i)
 				{
@@ -668,10 +669,10 @@ void judgeMove(int x, int y)
 	int result;
 	if (x >= 0 && x < mapSize && y >= 0 && y < mapSize)
 	{
-		
+
 		if (map[y][x] != WALL)
 		{
-			
+
 			X = x;
 			Y = y;
 		}
