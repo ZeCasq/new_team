@@ -30,6 +30,6 @@ void fl(void) {
 	mciSendString(TEXT("play mp3_6"), NULL, 0, NULL);
 }
 void clea(void) {
-	mciSendString(TEXT("open \"clear_s.m4a\" type mpegvideo alias mp3_7"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"clear_S.mp3\" type mpegvideo alias mp3_7"), NULL, 0, NULL);
 	mciSendString(TEXT("play mp3_7"), NULL, 0, NULL);
 }

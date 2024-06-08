@@ -327,6 +327,7 @@ void game(void) {
 				cls;
 			}
 			else {
+				cls;
 				clea();
 				claer();
 				delay;
@@ -334,8 +335,10 @@ void game(void) {
 				if (kbhit())
 					while (!GetAsyncKeyState(VK_RETURN)) {//게임 완전 클리어
 					}
-				mciSendString(TEXT("close mp3_7"), NULL, 0, NULL);
+				gotoxy(65, 25); printf("               로딩중...               ");
 				Sleep(3000);
+				mciSendString(TEXT("close mp3_7"), NULL, 0, NULL);
+				
 			}
 			return;
 		}

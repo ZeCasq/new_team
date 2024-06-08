@@ -151,14 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="button_s.mp3" />
+    <Media Include="clear_S.mp3" />
     <Media Include="click_s.mp3" />
     <Media Include="flag_s.mp3" />
     <Media Include="gameover.mp3" />
     <Media Include="maze.mp3" />
     <Media Include="warp.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="clear_s.m4a" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
