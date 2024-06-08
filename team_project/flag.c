@@ -263,6 +263,8 @@ int judgeFlag()
 			clear += Flages[temp].clear;
 			map[Y][X] = SPACE;
 
+			return;
+			/*
 			cls;
 			if (lev < 3) {
 				cls;
@@ -291,6 +293,7 @@ int judgeFlag()
 				main();
 				return 1;
 			}
+			*/
 		}
 		else if (temp == 3)				//²Î
 		{

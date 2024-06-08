@@ -4,75 +4,91 @@ void con_txt(void);
 
 void game(void); //게임 전반적인 구성
 int main_menu();
-void menu(void);
+int menu(void);
 void init();
 
 
 int first = 0; //게임 실행후 플레이가 최초인지 아닌지 구분
 int X, Y;
 int Life, sec, clear, eyesight;
+int regame = 0;
 
 
 extern int** map, flag_time, flag_time2, flag_time3, flag_time100;
 struct condition playeR = { 0,0,0 };
 int main(void) {
-	
-	setlocale(LC_CTYPE, ""); // 유니코드 출력 설정
-	
-	int POS = main_menu();
-	delay;
-	if (first == 0) {
-		story();
-		
-		gotoxy(73, 25); printf("넘어가려면 enter 누르시오        ");
-		while (!GetAsyncKeyState(VK_RETURN));
-		cl();
-		cls;
-		Sleep(300);
-		con_txt();
-		gotoxy(73, 25); printf("넘어가려면 enter 누르시오        ");
-		while (!GetAsyncKeyState(VK_RETURN));
-		cl();
-		
-		cls;
-		Sleep(300);
-		first = 1;
-	}
-	
 
-	//게임 부분
-	switch (POS) {
-	//게임 시작 파트
-	case 0 :
-		level();
-		game();
-		break;
-	case 1:
-		//이어하기
-		break;
-	case 2:
-		printf("아무키나 누르시오..");
-		pause;
-		exit(0);
-		break;
+	setlocale(LC_CTYPE, ""); // 유니코드 출력 설정
+	while (1)
+	{
+		if (regame == 1) {
+			game();
+		}
+		else if (clear == 1 && lev < 3)		//이지,노멀 클리어시 다음 레벨로 진행
+		{
+			lev++;
+			game();
+		}
+		else
+		{
+			int POS = main_menu();
+			delay;
+			if (first == 0) {
+				story();
+
+				gotoxy(73, 25); printf("넘어가려면 enter 누르시오        ");
+				while (!GetAsyncKeyState(VK_RETURN));
+				cl();
+				cls;
+				Sleep(300);
+				con_txt();
+				gotoxy(73, 25); printf("넘어가려면 enter 누르시오        ");
+				while (!GetAsyncKeyState(VK_RETURN));
+				cl();
+
+				cls;
+				Sleep(300);
+				first = 1;
+			}
+
+
+			//게임 부분
+
+			switch (POS) {
+				//게임 시작 파트
+			case 0:
+				level();
+				game();
+				break;
+			case 1:
+				//이어하기
+				break;
+			case 2:
+				printf("아무키나 누르시오..");
+				pause;
+				exit(0);
+				break;
+			}
+		}
 	}
+
 	return 0;
 }
 
 //메인 메뉴 호출
 int main_menu(void) {
 	//int lives = 3; //목숨, 전역으로 뺀다.
-	
-	
+
+
 	//시작 화면 파트
 	int p = 0;
 	CursorView(0);    //커서의 깜빡임을 숨겨준다.
 	system("COLOR 0F");    //화면 배경을 검정, 글씨 색깔을 하얀색으로 설정해 준다.	 
 	mainPtr();
-	
+
 	while (1) {
 		title1();
-		
+
 		if (GetAsyncKeyState(VK_LEFT)) {
 			bs();
 			if (p == 0) p = 2;
@@ -83,10 +99,10 @@ int main_menu(void) {
 			if (p == 2) p = 0;
 			else p += 1;
 		}
-		else if (GetAsyncKeyState(VK_RETURN)){
-			cl(); 
+		else if (GetAsyncKeyState(VK_RETURN)) {
+			cl();
 			break;
-	}
+		}
 		switch (p) {
 		case 0:
 			SetColor(11);
@@ -129,30 +145,30 @@ void game(void) {
 	time_t b = 0;
 	mciSendString(TEXT("open \"maze.mp3\" type mpegvideo alias mp3_1"), NULL, 0, NULL);
 	mciSendString(TEXT("play mp3_1"), NULL, 0, NULL);
-	int ch;				
+	int ch;
 	Start_time = time(0); //게임 시작 시간 설정
 	GamePlay();
 	makeFlag();//난이도에 따라 깃발 배치갯수가 다르면 좋을듯
 	gotoxy(0, 0);
 	printf("level: %d", lev);
 	while (1) {
-		if (co == 1 ) {
+		if (co == 1) {
 			if (time(0) - flag_time100 < 5) {
 				comment(com);
-				
-				
+
+
 			}
 			else {
 				flag_time100 = 0;
 				cls;
 				co = 0;
 			}
-			
+
 		}
 		if (time(0) - a > 1) {
 			mciSendString(TEXT("close mp3_6"), NULL, 0, NULL);
 		}
-		if (time(0) - b> 150 ) {
+		if (time(0) - b > 150) {
 			mciSendString(TEXT("close mp3_1"), NULL, 0, NULL);
 			mciSendString(TEXT("open \"maze.mp3\" type mpegvideo alias mp3_1"), NULL, 0, NULL);
 			mciSendString(TEXT("play mp3_1"), NULL, 0, NULL);
@@ -169,14 +185,14 @@ void game(void) {
 			gotoxy(2, 23);
 			printf("시야 버프: %3d", playeR.sight_p - time(0) + flag_time);
 		}
-		else if (count == 2 ) {
-				cls;
-				gotoxy(0, 0);
-				printf("level: %d", lev);
-				flag_time = 0;
-				eyesight -= 2;
-				playeR.sight_p = 0;
-				count = 0;
+		else if (count == 2) {
+			cls;
+			gotoxy(0, 0);
+			printf("level: %d", lev);
+			flag_time = 0;
+			eyesight -= 2;
+			playeR.sight_p = 0;
+			count = 0;
 		}
 		if (time(0) - flag_time2 < playeR.sight_m) {
 			if (coun == 0) {
@@ -188,7 +204,7 @@ void game(void) {
 			gotoxy(2, 22);
 			printf("시야 너프: %3d", playeR.sight_m - time(0) + flag_time2);
 		}
-		else if (coun == 2  ){
+		else if (coun == 2) {
 			cls;
 			gotoxy(0, 0);
 			printf("level: %d", lev);
@@ -205,7 +221,7 @@ void game(void) {
 			gotoxy(2, 21);
 			printf("환각 버섯: %3d", playeR.mushroom - time(0) + flag_time3);
 		}
-		else if (cou == 2 ) {
+		else if (cou == 2) {
 			cls;
 			gotoxy(0, 0);
 			printf("level: %d", lev);
@@ -214,12 +230,27 @@ void game(void) {
 			playeR.mushroom = 0;
 			cou = 0;
 		}
-		
-		
+
+
 		//esc 눌러서 일시정지
 		if (GetAsyncKeyState(VK_ESCAPE)) {
 			Stop_time = time(0); // 멈춘 시간 저장
-			menu();
+			while (1) {
+				int m_c = menu();
+				if (m_c == 0) {
+					break;
+				}
+				else if (m_c == 1) {
+					regame = 1;
+					return;
+				}
+				else if (m_c == 2) {
+					continue;
+				}
+				else if (m_c == 3) {
+					return;
+				}
+			}
 			cls;
 			Start_time += (time(0) - Stop_time); //멈춘 시간은 제한시간에서 제외
 			pause_item(&playeR.sight_p);
@@ -277,37 +308,63 @@ void game(void) {
 				bomb_num -= 1;
 				bomb();
 			}
-			map[Y][X] = 2;
-			
+			map[Y - 1][X] = 2;
+
 		}
 
+		if (clear)
+		{
+			if (lev < 3) {
+				cls;
+				clea();
+				claer();
+				gotoxy(73, 25); printf("다음 레벨로 넘어가려면 enter..");
 
-			
-		
-		printMap();
-		gotoxy(2, 26);
-		printf("X: %d Y: %d", X, Y);
-		gotoxy(2, 24);
-		printf("폭탄 수: %d",bomb_num);
-		//게임 시간 표현
-		
-		gotoxy(2, 25);
-
-		printf("time : %d           ", full_time - ((time(0) - Start_time)));
-		if (full_time - (time(0) - Start_time) <= 0) {
-			cls;
-			GameOver();
-			break;
+				if (kbhit())
+					while (!GetAsyncKeyState(VK_RETURN)) {//게임 완전 클리어
+					}
+				mciSendString(TEXT("close mp3_7"), NULL, 0, NULL);
+				cls;
+			}
+			else {
+				clea();
+				claer();
+				delay;
+				gotoxy(65, 25); printf("메인 메뉴로 가려면 enter 누르세요..");
+				if (kbhit())
+					while (!GetAsyncKeyState(VK_RETURN)) {//게임 완전 클리어
+					}
+				mciSendString(TEXT("close mp3_7"), NULL, 0, NULL);
+				Sleep(3000);
+			}
+			return;
 		}
-		//system("cls");
+		else {
+			printMap();
+			gotoxy(2, 26);
+			printf("X: %d Y: %d", X, Y);
+			gotoxy(2, 24);
+			printf("폭탄 수: %d", bomb_num);
+			//게임 시간 표현
+
+			gotoxy(2, 25);
+
+			printf("time : %d           ", full_time - ((time(0) - Start_time)));
+			if (full_time - (time(0) - Start_time) <= 0) {
+				cls;
+				GameOver();
+				break;
+			}
+			//system("cls");
+		}
 	}
 }
 
 
 //일시정지 함수
-void menu(void) {
+int menu(void) {
 	cls;
-	
+
 	gotoxy(20, 10); printf("재개");
 	gotoxy(20, 12); printf("처음부터 다시 시작");
 	gotoxy(20, 14); printf("게임 설명");
@@ -330,17 +387,17 @@ void menu(void) {
 		}
 		switch (pos) {
 		case 0:
-			
+
 			SetColor(11);
 			gotoxy(20, 10); printf("재개");
 			SetColor(15);
 			gotoxy(20, 12); printf("처음부터 다시 시작");
 			gotoxy(20, 14); printf("게임 설명");
 			gotoxy(20, 16); printf("메인 메뉴");
-			
+
 			break;
 		case 1:
-			
+
 			gotoxy(20, 10); printf("재개");
 			SetColor(11);
 			gotoxy(20, 12); printf("처음부터 다시 시작");
@@ -349,7 +406,7 @@ void menu(void) {
 			gotoxy(20, 16); printf("메인 메뉴");
 			break;
 		case 2:
-			
+
 			gotoxy(20, 10); printf("재개");
 			gotoxy(20, 12); printf("처음부터 다시 시작");
 			SetColor(11);
@@ -358,7 +415,7 @@ void menu(void) {
 			gotoxy(20, 16); printf("메인 메뉴");
 			break;
 		case 3:
-			
+
 			gotoxy(20, 10); printf("재개");
 			gotoxy(20, 12); printf("처음부터 다시 시작");
 			gotoxy(20, 14); printf("게임 설명");
@@ -368,19 +425,21 @@ void menu(void) {
 			break;
 		default: break;
 		}
-		
+
 	}
-	
-	switch (pos){
+
+	switch (pos) {
 	case 0:
 		break;
+		return 0;
 	case 1:
 		mciSendString(TEXT("close mp3_1"), NULL, 0, NULL);
 		cls;
 		playeR.mushroom = 0;
 		playeR.sight_m = 0;
 		playeR.sight_p = 0;
-		game();
+		//game();
+		return 1;
 		break;
 	case 2:		//게임 설명
 		cls;
@@ -412,13 +471,12 @@ void menu(void) {
 				break;
 		}
 		delay;
-		menu();
+		return 2;
 		break;
 	case 3:										//메인 메뉴로 돌아가기
 		mciSendString(TEXT("close mp3_1"), NULL, 0, NULL);
 		cls;
-		main();
-		break;
+		return 3;
 	default: break;
 	}
 }
@@ -427,12 +485,12 @@ void menu(void) {
 
 //조작키 설명
 void con_txt(void) {
-	gotoxy(20,10); printf("\u2190         left");
-	gotoxy(20,12); printf("\u2192         right");
-	gotoxy(20,14); printf("\u2191	       up");
-	gotoxy(20,16); printf("\u2193	       down");
+	gotoxy(20, 10); printf("\u2190         left");
+	gotoxy(20, 12); printf("\u2192         right");
+	gotoxy(20, 14); printf("\u2191	       up");
+	gotoxy(20, 16); printf("\u2193	       down");
 	gotoxy(20, 18); printf("space      bomb");
-	gotoxy(20,20); printf("esc	       pause");
+	gotoxy(20, 20); printf("esc	       pause");
 	gotoxy(73, 25); printf("다시 돌아가려면 enter 누르세요..");
 
 }
@@ -442,30 +500,31 @@ void con_txt(void) {
 
 void init() {			//lev별로 다른 초기화ㄱㄴ, initFlag()에서도 레벨별로 다른 초기화 ㄱㄴ하게 하자
 	initFlag();
+	regame = 0;
 	X = Y = 98;
 	bomb_num = 99;
-	
+
 	if (lev == 1)
 	{
-		
+
 		sec = 300;
 		clear = 0;
 		eyesight = 8;
 	}
 	else if (lev == 2)
 	{
-		
+
 		sec = 300;
 		clear = 0;
 		eyesight = 5;
 	}
 	else if (lev == 3)
 	{
-		
+
 		sec = 300;
 		clear = 0;
 		eyesight = 5;
 	}
-	
+
 	return;
 }
