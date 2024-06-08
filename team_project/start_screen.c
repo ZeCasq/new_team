@@ -30,9 +30,8 @@ void mainPtr(void) {
     printf("                                          \n");
     printf("                                          \n");
     SetColor(11);
-    gotoxy(20, 20); printf("새로  하기");
+    gotoxy(30, 20); printf("시작  하기");
     SetColor(15);
-	gotoxy(47, 20); printf("이어  하기");
-	gotoxy(75, 20); printf("게임  종료");
+	gotoxy(62, 20); printf("게임  종료");
 	return;
 }

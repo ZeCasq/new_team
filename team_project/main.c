@@ -91,12 +91,12 @@ int main_menu(void) {
 
 		if (GetAsyncKeyState(VK_LEFT)) {
 			bs();
-			if (p == 0) p = 2;
+			if (p == 0) p = 1;
 			else p -= 1;
 		}
 		else if (GetAsyncKeyState(VK_RIGHT)) {
 			bs();
-			if (p == 2) p = 0;
+			if (p == 1) p = 0;
 			else p += 1;
 		}
 		else if (GetAsyncKeyState(VK_RETURN)) {
@@ -106,25 +106,17 @@ int main_menu(void) {
 		switch (p) {
 		case 0:
 			SetColor(11);
-			gotoxy(20, 20); printf("새로  하기");
+			gotoxy(30, 20); printf("시작  하기");
 			SetColor(15);
-			gotoxy(47, 20); printf("이어  하기");
-			gotoxy(75, 20); printf("게임  종료");
+			gotoxy(62, 20); printf("게임  종료");
 			break;
 		case 1:
-			gotoxy(20, 20); printf("새로  하기");
+			gotoxy(30, 20); printf("시작  하기");
 			SetColor(11);
-			gotoxy(47, 20); printf("이어  하기");
-			SetColor(15);
-			gotoxy(75, 20); printf("게임  종료");
-			break;
-		case 2:
-			gotoxy(20, 20); printf("새로  하기");
-			gotoxy(47, 20); printf("이어  하기");
-			SetColor(11);
-			gotoxy(75, 20); printf("게임  종료");
+			gotoxy(62, 20); printf("게임  종료");
 			SetColor(15);
 			break;
+	
 
 		default: break;
 		}
