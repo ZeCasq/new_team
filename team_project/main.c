@@ -378,7 +378,7 @@ void game(void) {
 		else {
 			printMap();
 			gotoxy(2, 26);
-			printf("X: %d Y: %d", X, Y);
+			printf("X: %d Y: %d  ", X, Y);
 			gotoxy(2, 24);
 			printf("폭탄 수: %d  ", bomb_num);
 			//게임 시간 표현
