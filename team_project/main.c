@@ -380,7 +380,7 @@ void game(void) {
 			gotoxy(2, 26);
 			printf("X: %d Y: %d", X, Y);
 			gotoxy(2, 24);
-			printf("ÆøÅº ¼ö: %d", bomb_num);
+			printf("ÆøÅº ¼ö: %d  ", bomb_num);
 			//°ÔÀÓ ½Ã°£ Ç¥Çö
 
 			gotoxy(2, 25);
