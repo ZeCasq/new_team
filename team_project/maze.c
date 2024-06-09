@@ -3,7 +3,7 @@
 
 //char* pMap[2] = {"  ", "■"};
 int** map, mapSize, ** backupMap;
-int lv = 1, timer = 0;
+timer = 0;
 
 void SetMap();
 int** RollingArray(int MapArr[RMS][RMS], int num, int block);
@@ -13,7 +13,7 @@ void GamePlay(void) {
 }
 
 void SetMap(void) {
-    mapSize = lv * 100;
+    mapSize = lev * 100;
     map = (int**)malloc(sizeof(int*) * mapSize);
     for (int i = 0; i < mapSize; i++)
         map[i] = (int*)malloc(sizeof(int) * mapSize);
@@ -22,7 +22,7 @@ void SetMap(void) {
         for (int j = 0; j < mapSize; j++)
             map[i][j] = SPACE;
 
-    timer = lv * 120;
+    timer = lev * 120;
 
     int num = mapSize / RMS;
 

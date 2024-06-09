@@ -69,6 +69,11 @@ void printMap()
 					printf("в┴");
 					SetColor(15);
 				}
+				else if (map[temp_y + i][temp_x + j] == 2) {
+					SetColor(12);
+					printf("бр");
+					SetColor(15);
+				}
 				else
 					printf("бр");
 			}

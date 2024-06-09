@@ -13,6 +13,7 @@ void print_telpo(int** p, int** p2, int, int, int, int);
 int flag_time = 0;
 int flag_time2 = 0;
 int flag_time3 = 0;
+int** Flag_level;
 
 Flag Flages[9];
 
@@ -52,6 +53,41 @@ int initFlag() {				// 2´Â Å»Ãâ±ê¹ß, 3: life +1, 4: life -1, 5: sec + 10, 6: sec
 	Flages[8].sec = 0;
 	Flages[8].clear = 0;
 	Flages[8].eyeSight = -1;
+
+	Flag_level = (int**)malloc(sizeof(int*) * 4);
+	for (int i = 1; i <= 3; i++)
+	{
+		Flag_level[i] = (int*)malloc(sizeof(int) * 11);
+	}
+
+	Flag_level[1][3] = 10;
+	Flag_level[1][4] = 8;
+	Flag_level[1][5] = 5;
+	Flag_level[1][6] = 8;
+	Flag_level[1][7] = 5;
+	Flag_level[1][8] = 5;
+	Flag_level[1][9] = 6;
+	Flag_level[1][10] = 3;
+
+	Flag_level[2][3] = 40;
+	Flag_level[2][4] = 30;
+	Flag_level[2][5] = 22;
+	Flag_level[2][6] = 30;
+	Flag_level[2][7] = 22;
+	Flag_level[2][8] = 22;
+	Flag_level[2][9] = 20;
+	Flag_level[2][10] = 9;
+
+	Flag_level[3][3] = 90;
+	Flag_level[3][4] = 60;
+	Flag_level[3][5] = 50;
+	Flag_level[3][6] = 60;
+	Flag_level[3][7] = 50;
+	Flag_level[3][8] = 50;
+	Flag_level[3][9] = 30;
+	Flag_level[3][10] = 15;
+
+	return;
 }
 
 int makeFlag()
@@ -76,7 +112,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//3¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][3]; i++)				//3¹ø±ê¹ß ¹èÄ¡
 	{
 
 		while (1)
@@ -96,7 +132,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//4¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][4]; i++)				//4¹ø±ê¹ß ¹èÄ¡
 	{
 		while (1)
 		{
@@ -115,7 +151,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//5¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][5]; i++)				//5¹ø±ê¹ß ¹èÄ¡
 	{
 
 		while (1)
@@ -135,7 +171,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//6¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][6]; i++)				//6¹ø±ê¹ß ¹èÄ¡
 	{
 
 		while (1)
@@ -155,7 +191,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//7¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][7]; i++)				//7¹ø±ê¹ß ¹èÄ¡
 	{
 
 		while (1)
@@ -175,7 +211,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//8¹ø±ê¹ß ¹èÄ¡
+	for (int i = 0; i < Flag_level[lev][8]; i++)				//8¹ø±ê¹ß ¹èÄ¡
 	{
 
 		while (1)
@@ -195,7 +231,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//9¹ø±ê¹ß ¹èÄ¡(telpo)
+	for (int i = 0; i < Flag_level[lev][9]; i++)				//9¹ø±ê¹ß ¹èÄ¡(telpo)
 	{
 
 
@@ -216,7 +252,7 @@ int makeFlag()
 		}
 	}
 
-	for (int i = 0; i < 5; i++)				//10¹ø±ê¹ß ¹èÄ¡(bomb)
+	for (int i = 0; i < Flag_level[lev][10]; i++)				//10¹ø±ê¹ß ¹èÄ¡(bomb)
 	{
 
 		while (1)
@@ -625,7 +661,11 @@ void print_telpo(int** p, int** p2, int past_x, int past_y, int past_X, int past
 						else if (p2[j][k] == SPACE)
 							printf("  ");
 						else if (p2[j][k] == PAST_PATH)
+						{
+							SetColor(9);
 							printf("¢Á");
+							SetColor(15);
+						}
 						else
 							printf("¡à");
 					}

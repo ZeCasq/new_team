@@ -338,6 +338,10 @@ void game(void) {
 		{
 			map[Y - 1][X] = 9;
 		}
+		if (GetAsyncKeyState(0x62) & 0x0001)
+		{
+			map[Y - 1][X] = 10;
+		}
 
 
 		if (clear)
@@ -533,29 +537,30 @@ void con_txt(void) {
 void init() {			//lev별로 다른 초기화ㄱㄴ, initFlag()에서도 레벨별로 다른 초기화 ㄱㄴ하게 하자
 	initFlag();
 	regame = 0;
-	X = Y = 98;
-	bomb_num = 99;
 
 	if (lev == 1)
 	{
-
+		bomb_num = 3;
 		sec = 300;
 		clear = 0;
-		eyesight = 8;
+		eyesight = 7;
+		X = Y = 48;
 	}
 	else if (lev == 2)
 	{
-
+		bomb_num = 3;
 		sec = 300;
 		clear = 0;
 		eyesight = 5;
+		X = Y = 98;
 	}
 	else if (lev == 3)
 	{
-
+		bomb_num = 5;
 		sec = 300;
 		clear = 0;
 		eyesight = 5;
+		X = Y = 148;
 	}
 
 	return;
