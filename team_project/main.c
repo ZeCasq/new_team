@@ -382,7 +382,6 @@ void game(void) {
 			gotoxy(2, 24);
 			printf("폭탄 수: %d  ", bomb_num);
 			//게임 시간 표현
-
 			gotoxy(2, 25);
 
 			printf("time : %d           ", full_time - ((time(0) - Start_time)));
